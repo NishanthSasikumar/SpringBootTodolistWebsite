@@ -53,7 +53,7 @@ public class AuthService {
         user.setUpdatedAt(LocalDateTime.now());
 
         authRepository.save(user);
-        String jwtToken = jwtService.generateToken(signupVariable.getEmail());
+        String jwtToken = jwtService.generateToken(signupVariable.getEmail(),user.getRole().getRole());
         Cookie cookie = new Cookie("jwt",jwtToken);
         cookie.setHttpOnly(true);
         cookie.setMaxAge(60*30);
@@ -78,7 +78,7 @@ public class AuthService {
             throw new BlockedUser("User account is blocked");
         }
 
-        String jwtToken = jwtService.generateToken(loginRequest.getEmail());
+        String jwtToken = jwtService.generateToken(loginRequest.getEmail(),user.getRole().getRole());
         Cookie cookie = new Cookie("jwt",jwtToken);
         cookie.setHttpOnly(true);
         cookie.setMaxAge(60*30);

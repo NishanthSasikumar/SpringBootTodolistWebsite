@@ -1,5 +1,6 @@
 package com.todoist.web.authentication.security;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -25,11 +26,24 @@ public class JWTService {
         return Keys.hmacShaKeyFor(Decoders.BASE64.decode(key));
     }
 
-    public String generateToken(String email) {
+    public String generateToken(String email,String role) {
         return Jwts.builder()
                 .subject(email)
+                .claim("role",role)
                 .expiration(new Date(System.currentTimeMillis() + expiration))
                 .signWith(getSecretKey())
                 .compact();
     }
+
+    public Claims extractInformation(String jwtString){
+        return Jwts.parser()
+                .verifyWith(getSecretKey())
+                .build()
+                .parseSignedClaims(jwtString).getPayload();
+    }
+
+    public String getEmail(String jwtString){
+        return extractInformation(jwtString).getSubject();
+    }
+
 }
