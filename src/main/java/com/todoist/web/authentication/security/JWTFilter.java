@@ -7,6 +7,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -18,6 +21,7 @@ import java.io.IOException;
 public class JWTFilter extends OncePerRequestFilter {
 
     JWTService jwtService;
+    CustomUserDetailService customUserDetailService;
     @Override
     protected void doFilterInternal(
             HttpServletRequest request,
@@ -36,8 +40,11 @@ public class JWTFilter extends OncePerRequestFilter {
             }
         }
 
-        if(jwtString!=null){
-            request.setAttribute("Email",jwtString);
+        if(jwtString!=null && SecurityContextHolder.getContext().getAuthentication()==null){
+
+            SecurityContext context = SecurityContextHolder.createEmptyContext();
+            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+                    customUserDetailService.loadUserByUsername(jwtService.getEmail(jwtString)),)
         }
         filterChain.doFilter(request,response);
     }
