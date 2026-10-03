@@ -1,5 +1,6 @@
 package com.todoist.web.authentication.DTO;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NonNull;
@@ -12,15 +13,15 @@ import lombok.Setter;
 @AllArgsConstructor
 public class SignupRequest {
 
-    @NonNull
+    @NotBlank
     private String email;
 
-    @NonNull
+    @NotBlank
     private String name;
 
-    @NonNull
+    @NotBlank
     private String password;
 
-    @NonNull
+    @NotBlank
     private String confirmPassword;
 }

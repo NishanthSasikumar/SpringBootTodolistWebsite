@@ -44,4 +44,10 @@ public class JWTService {
         return extractInformation(jwtString).getSubject();
     }
 
+    public boolean isTokenValid(String jwtString){
+        return !extractInformation(jwtString)
+                .getExpiration()
+                .before(new Date());
+    }
+
 }

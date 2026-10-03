@@ -24,6 +24,7 @@ public class CustomUserDetailService implements UserDetailsService {
         User user = authRepository.findByEmail(email);
         return org.springframework.security.core.userdetails.User
                 .withUsername(email)
+                .password(user.getPassword())
                 .roles(user.getRole().getRole())
                 .build();
     }

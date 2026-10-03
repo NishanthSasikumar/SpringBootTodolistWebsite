@@ -38,4 +38,10 @@ public class GlobalExceptionHandler {
         ErrorResponse errorResponse=new ErrorResponse(ex.getMessage());
         return new ResponseEntity<>(errorResponse,HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(SessionExpiredException.class)
+    public ResponseEntity<ErrorResponse> handleSessionExpired(SessionExpiredException ex){
+        ErrorResponse errorResponse=new ErrorResponse((ex.getMessage()));
+        return new ResponseEntity<>(errorResponse,HttpStatus.REQUEST_TIMEOUT);
+    }
 }
