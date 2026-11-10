@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -28,17 +29,21 @@ public class Todos {
 
     private String description;
 
+    @Enumerated(EnumType.STRING)
     private Priority priority;
 
     private LocalDate duedate;
 
+    @Enumerated(EnumType.STRING)
     private Status status;
 
-    private LocalDateTime completed;
+    private Instant completed;
 
-    private LocalDateTime createdAt;
+    private Instant createdAt;
 
-    private LocalDate updatedAt;
+    private Instant updatedAt;
+
+    private boolean is_deleted;
 
     @ManyToOne
     @JoinColumn(name = "user_id")

@@ -44,4 +44,10 @@ public class GlobalExceptionHandler {
         ErrorResponse errorResponse=new ErrorResponse((ex.getMessage()));
         return new ResponseEntity<>(errorResponse,HttpStatus.REQUEST_TIMEOUT);
     }
+
+    @ExceptionHandler(InvalidCredentialsException.class)
+    public ResponseEntity<ErrorResponse> handleInvalidCredentialsException(InvalidCredentialsException ex){
+        ErrorResponse errorResponse=new ErrorResponse((ex.getMessage()));
+        return new ResponseEntity<>(errorResponse,HttpStatus.BAD_REQUEST);
+    }
 }

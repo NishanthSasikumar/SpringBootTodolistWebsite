@@ -9,20 +9,21 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateTodosRequest {
+public class CreateTodoRequest {
 
     @NotBlank(message = "Title can't be Blank")
     String title;
     String description;
     @NotNull(message = "Duedate can't be empty")
     @FutureOrPresent(message = "Due date cannot be in the past")
-    LocalTime duedate;
+    LocalDate duedate;
     @NotBlank(message = "Priority can't be blank")
     String priority;
 }

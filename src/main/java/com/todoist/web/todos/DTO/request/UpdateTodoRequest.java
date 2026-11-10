@@ -1,6 +1,7 @@
 package com.todoist.web.todos.DTO.request;
 
 import jakarta.validation.constraints.FutureOrPresent;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +13,7 @@ import java.time.LocalTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UpdateTodosRequest {
+public class UpdateTodoRequest {
 
     String title;
     String description;

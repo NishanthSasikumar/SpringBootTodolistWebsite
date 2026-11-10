@@ -54,16 +54,11 @@ public class JWTFilter extends OncePerRequestFilter {
             if(jwtService.isTokenValid(jwtString)) {
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                         userDetails,
-                        userDetails.getPassword(),
+                        null,
                         userDetails.getAuthorities()
                 );
                 context.setAuthentication(authentication);
                 SecurityContextHolder.setContext(context);
-                System.out.println(
-                        "JWT authentication set: " +
-                                SecurityContextHolder.getContext().getAuthentication()
-                );
-                System.out.println("In SecurityContext");
             }
             else {
                 throw new SessionExpiredException("Session Expired");
