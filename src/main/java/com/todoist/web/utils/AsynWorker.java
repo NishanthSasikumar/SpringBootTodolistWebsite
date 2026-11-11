@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 @EnableAsync
 public class AsynWorker {
 
-    @Bean
+    @Bean(name = "EmailExecutor")
     public Executor  getExecutor(){
         ThreadPoolExecutor threadPoolExecutor=
                 new ThreadPoolExecutor(
