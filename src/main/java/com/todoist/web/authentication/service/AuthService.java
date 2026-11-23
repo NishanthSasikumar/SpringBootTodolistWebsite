@@ -61,8 +61,6 @@ public class AuthService {
         user.setRole(role);
         user.setBlocked(false);
         user.setPassword(encoder.encode(signupVariable.getPassword()));
-        user.setCreatedAt(LocalDateTime.now());
-        user.setUpdatedAt(LocalDateTime.now());
 
         authRepository.save(user);
         String jwtToken = jwtService.generateToken(signupVariable.getEmail(),user.getRole().getRole());

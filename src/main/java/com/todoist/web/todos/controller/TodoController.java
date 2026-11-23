@@ -29,7 +29,6 @@ public class TodoController {
 
     @PatchMapping("/{id}")
     public TodoResponse patchTodos(@PathVariable long id, @RequestBody JsonNode request){
-
         return todoService.patchTodo(id,request);
     }
 

@@ -49,4 +49,14 @@ public class Todos {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @PrePersist
+    public void beforeCreate() {
+        createdAt=Instant.now();
+        updatedAt=Instant.now();
+    }
+
+    @PreUpdate
+    public void beforeUpdate(){
+        updatedAt=Instant.now();
+    }
 }

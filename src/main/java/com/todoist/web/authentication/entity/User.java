@@ -1,11 +1,13 @@
 package com.todoist.web.authentication.entity;
 
+import ch.qos.logback.core.status.InfoStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 
 @Entity
@@ -32,7 +34,18 @@ public class User {
 
     private Boolean blocked;
 
-    private LocalDateTime createdAt;
+    private Instant createdAt;
 
-    private LocalDateTime updatedAt;
+    private Instant updatedAt;
+
+    @PrePersist
+    public void beforeCreate() {
+        createdAt=Instant.now();
+        updatedAt=Instant.now();
+    }
+
+    @PreUpdate
+    public void beforeUpdate(){
+        updatedAt=Instant.now();
+    }
 }
